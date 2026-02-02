@@ -1,38 +1,44 @@
-# Variables
-NAME = mariadb
-IMG_NAME = mariadb:inception
+# --- VARIABLES ---
+NAME        = mariadb
+IMG_NAME    = mariadb:inception
+# Dossier où se trouve le Dockerfile (point actuel)
+BUILD_PATH  = .
 
-# Commandes
+# --- REGLES ---
+
+# Par défaut, on construit et on lance
 all: build run
 
-# Construit l'image
+# 1. Construction de l'image
 build:
-	docker build -t $(IMG_NAME) .
+	docker build -t $(IMG_NAME) $(BUILD_PATH)
 
-# Lance le conteneur (avec toutes tes variables)
+# 2. Lancement du conteneur
+# J'ai mis toute la commande sur une seule ligne pour éviter les bugs de backslash \
+# C'est moins joli mais beaucoup plus fiable pour commencer.
 run:
-    @echo "Lancement du conteneur..."
-    docker run -d --name $(NAME) \
-    -e DB_NAME=inception \
-    -e DB_USER=ksilvest \
-    -e DB_PASSWORD=password \
-    -e DB_ROOT_PASSWORD=rootpassword \
-    $(IMG_NAME)
-    @echo "Conteneur lancé ! Tape 'make logs' pour voir ce qui se passe."
+	@echo "🚀 Lancement du conteneur $(NAME)..."
+	# On remplace toutes les lignes -e PAR --env-file
+	docker run -d --name $(NAME) \
+	--env-file ../../.env \
+	$(IMG_NAME)
+	@echo "✅ Conteneur lancé !"
 
-# Entre dans le conteneur (pour tester manuellement)
+# 3. Entrer dans le conteneur (Debug)
 exec:
 	docker exec -it $(NAME) sh
 
-# Affiche les logs
+# 4. Voir les logs
 logs:
 	docker logs $(NAME)
 
-# Nettoie le conteneur (Stop + Remove)
+# 5. Nettoyage (Le '-' devant docker permet d'ignorer l'erreur si le conteneur n'existe pas)
 clean:
-	@echo "Nettoyage..."
+	@echo "🧹 Nettoyage..."
 	-docker stop $(NAME)
 	-docker rm $(NAME)
 
-# La commande magique : Nettoie, Reconstruit et Relance
+# 6. Re: Nettoyer, Reconstruire, Relancer
 re: clean build run
+
+.PHONY: all build run exec logs clean re
