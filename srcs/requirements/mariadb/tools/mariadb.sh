@@ -12,7 +12,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
   echo -e "${YELLOW}Downloading MariaDB...${RESET}"
   mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
-  echo -e "${YELLOW}Starting the server...${RESET}"
+  echo -e "${YELLOW}Starting temporary server...${RESET}"
   /usr/bin/mysqld_safe --datadir=/var/lib/mysql &
 
   echo -e "${YELLOW}Waiting for server startup...${RESET}"
@@ -29,6 +29,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
   echo -e "${YELLOW}Stopping temporary server...${RESET}"
   mysqladmin -u root -p"${DB_ROOT_PASSWORD}" shutdown
+
+  echo -e "${GREEN}MariaDB setup done!${RESET}"
 fi
 
+echo -e "${GREEN}Starting MariaDB final server...${RESET}"
 exec mysqld_safe --datadir=/var/lib/mysql
