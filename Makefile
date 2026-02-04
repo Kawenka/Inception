@@ -13,4 +13,12 @@ re:
 	docker compose -f ./srcs/docker-compose.yml down
 	docker compose -f ./srcs/docker-compose.yml up -d --build
 
+# Pour faire des tests
+exec-wp:
+	docker exec -it srcs-wordpress-1 sh
+
+# Pour faire des tests
+exec-db:
+	docker exec -it srcs-mariadb-1 sh
+
 .PHONY: all down stop re
