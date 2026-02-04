@@ -10,4 +10,7 @@
 # Sinon on lance la procedure (3 prochaines etapes)
 
 echo "Mode TEST activé : J'attends..."
+
+mariadb -h mariadb -u $MYSQL_USER -p$MYSQL_PASSWORD
+
 tail -f /dev/null
