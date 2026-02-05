@@ -28,14 +28,31 @@ done
 echo -e "${GREEN}Connected to the database${RESET}"
 
 if [ ! -f /usr/local/bin/wp ]; then
-    echo -e "${YELLOW}Downloading wp-cli${RESET}"
+    echo -e "${YELLOW}Downloading wp-cli...${RESET}"
     wget --quiet https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x wp-cli.phar
     mv wp-cli.phar /usr/local/bin/wp
 fi
 
 if [ ! -f wp-config.php ]; then
-    php -d memory_limit=512M /usr/local/bin/wp core download
+    echo -e "${YELLOW}Downloading Wordpress...${RESET}"
+    php -d memory_limit=512M /usr/local/bin/wp core download --allow-root
+
+    echo -e "${YELLOW}Config creation...${RESET}"
+    wp config create --dbname=$MYSQL_DATABASE \
+                    --dbuser=$MYSQL_USER \
+                    --dbhost=$DB_HOST \
+                    --dbpass=$MYSQL_PASSWORD \
+                    --allow-root
+
+    echo -e "${YELLOW}Finalizing installation...${RESET}"
+    wp core install --url=$DOMAIN_NAME \
+                    --title=$WP_TITLE \
+                    --admin_user=$WP_ADMIN_USER \
+                    --admin_password=$WP_ADMIN_PASSWORD \
+                    --admin_email=$WP_ADMIN_EMAIL \
+                    --skip-email \
+                    --allow-root
 fi
 
-tail -f /dev/null
+exec /usr/sbin/php-fpm83 -F
