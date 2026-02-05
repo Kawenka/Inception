@@ -21,4 +21,12 @@ exec-wp:
 exec-db:
 	docker exec -it srcs-mariadb-1 sh
 
+# Pas necessaire
+logs-wp:
+	docker logs srcs-wordpress-1
+
+# Pas necessaire
+logs-db:
+	docker logs srcs-mariadb-1
+
 .PHONY: all down stop re
