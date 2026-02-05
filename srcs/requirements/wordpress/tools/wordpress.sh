@@ -34,4 +34,8 @@ if [ ! -f /usr/local/bin/wp ]; then
     mv wp-cli.phar /usr/local/bin/wp
 fi
 
+if [ ! -f wp-config.php ]; then
+    php -d memory_limit=512M /usr/local/bin/wp core download
+fi
+
 tail -f /dev/null
