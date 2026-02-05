@@ -5,13 +5,6 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 RESET='\033[0m'
 
-# Verifier si wp-config.php existe
-# Sinon on lance la procedure 
-# Telecharger les fichiers sources de WordPress
-# Configurer le lien avec la base de bonnees (wp-config.php)
-# installer le liste (Creer les tables, le titre, l'admin)
-# Creer l'utilisateur secondaire (demande par le sujet)
-
 MAX_RETRIES=10
 COUNT=0
 
@@ -36,14 +29,13 @@ fi
 
 if [ ! -f wp-config.php ]; then
     echo -e "${YELLOW}Downloading Wordpress...${RESET}"
-    php -d memory_limit=512M /usr/local/bin/wp core download --allow-root
+    php -d memory_limit=512M /usr/local/bin/wp core download
 
     echo -e "${YELLOW}Config creation...${RESET}"
     wp config create --dbname=$MYSQL_DATABASE \
                     --dbuser=$MYSQL_USER \
                     --dbhost=$DB_HOST \
-                    --dbpass=$MYSQL_PASSWORD \
-                    --allow-root
+                    --dbpass=$MYSQL_PASSWORD
 
     echo -e "${YELLOW}Finalizing installation...${RESET}"
     wp core install --url=$DOMAIN_NAME \
@@ -51,8 +43,12 @@ if [ ! -f wp-config.php ]; then
                     --admin_user=$WP_ADMIN_USER \
                     --admin_password=$WP_ADMIN_PASSWORD \
                     --admin_email=$WP_ADMIN_EMAIL \
-                    --skip-email \
-                    --allow-root
+                    --skip-email 
+
+    echo -e "${YELLOW}Creating a second user...${RESET}"
+    wp user create $WP_USER $WP_USER_EMAIL \
+                    --user_pass=$WP_PASSWORD \
+                    --role=author 
 fi
 
 exec /usr/sbin/php-fpm83 -F

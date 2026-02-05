@@ -23,10 +23,10 @@ exec-db:
 
 # Pas necessaire
 logs-wp:
-	docker logs srcs-wordpress-1
+	docker logs -f srcs-wordpress-1
 
 # Pas necessaire
 logs-db:
-	docker logs srcs-mariadb-1
+	docker logs -f srcs-mariadb-1
 
 .PHONY: all down stop re
