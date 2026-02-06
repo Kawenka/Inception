@@ -1,4 +1,3 @@
 srcs/.env
-secrets/*
-!secrets/.keep
-**/data
+.env
+/home/*/data
