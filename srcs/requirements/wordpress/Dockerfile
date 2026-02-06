@@ -34,7 +34,7 @@ COPY tools/wordpress.sh /usr/local/bin/wordpress.sh
 RUN chmod +x /usr/local/bin/wordpress.sh
 
 RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www/html
+    chown -R www-data:www-data /var/www/html /var/log/php83
 
 USER www-data
 

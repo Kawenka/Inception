@@ -20,12 +20,6 @@ done
 
 echo -e "${GREEN}Connected to the database${RESET}"
 
-if [ ! -f /usr/local/bin/wp ]; then
-    echo -e "${YELLOW}Downloading wp-cli...${RESET}"
-    wget --quiet https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-    chmod +x wp-cli.phar
-    mv wp-cli.phar /usr/local/bin/wp
-fi
 
 if [ ! -f wp-config.php ]; then
     echo -e "${YELLOW}Downloading Wordpress...${RESET}"
