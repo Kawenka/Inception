@@ -10,6 +10,8 @@ stop:
 	docker compose -f ./srcs/docker-compose.yml stop
 
 re:
+	sudo rm -rf /home/ksilvest/data/mariadb/*
+	sudo rm -rf /home/ksilvest/data/wordpress/*
 	docker compose -f ./srcs/docker-compose.yml down
 	docker compose -f ./srcs/docker-compose.yml up -d --build
 

@@ -20,7 +20,6 @@ done
 
 echo -e "${GREEN}Connected to the database${RESET}"
 
-
 if [ ! -f wp-config.php ]; then
     echo -e "${YELLOW}Downloading Wordpress...${RESET}"
     php -d memory_limit=512M /usr/local/bin/wp core download

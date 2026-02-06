@@ -25,9 +25,9 @@ RUN wget --quiet https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/w
 
 RUN adduser -S www-data -G www-data
 
-RUN sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/g' /etc/php*/php-fpm.d/www.conf && \
-    sed -i 's/user = nobody/user = www-data/g' /etc/php*/php-fpm.d/www.conf && \
-    sed -i 's/group = nobody/group = www-data/g' /etc/php*/php-fpm.d/www.conf
+RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php*/php-fpm.d/www.conf && \
+    sed -i '/^user =/d' /etc/php*/php-fpm.d/www.conf && \
+    sed -i '/^group =/d' /etc/php*/php-fpm.d/www.conf
 
 COPY tools/wordpress.sh /usr/local/bin/wordpress.sh
 
