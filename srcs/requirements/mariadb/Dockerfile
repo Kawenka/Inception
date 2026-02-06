@@ -13,6 +13,8 @@ COPY tools/mariadb.sh /usr/local/bin/mariadb.sh
 
 RUN chmod +x /usr/local/bin/mariadb.sh
 
+USER mysql
+
 EXPOSE 3306
 
 ENTRYPOINT ["/usr/local/bin/mariadb.sh"]
