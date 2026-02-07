@@ -17,18 +17,24 @@ re:
 
 # Pour faire des tests
 exec-wp:
-	docker exec -it srcs-wordpress-1 sh
+	docker exec -it wordpress sh
 
 # Pour faire des tests
 exec-db:
-	docker exec -it srcs-mariadb-1 sh
+	docker exec -it mariadb sh
+
+exec-ng:
+	docker exec -it nginx sh
 
 # Pas necessaire
 logs-wp:
-	docker logs -f srcs-wordpress-1
+	docker logs -f wordpress
 
 # Pas necessaire
 logs-db:
-	docker logs -f srcs-mariadb-1
+	docker logs -f mariadb
+
+logs-ng:
+	docker logs -f nginx
 
 .PHONY: all down stop re
