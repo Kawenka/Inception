@@ -16,6 +16,7 @@ RUN apk add --no-cache php \
         php-tokenizer \
         php-iconv \
         php-phar \
+        php-redis \
         wget \
         mariadb-client
 

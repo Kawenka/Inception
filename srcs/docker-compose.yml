@@ -21,6 +21,7 @@ services:
       - inception
     depends_on:
       - mariadb
+      - redis
     volumes:
       - wordpress_data:/var/www/html
     restart: always
@@ -40,6 +41,14 @@ services:
     volumes:
       - wordpress_data:/var/www/html
     restart: on-failure
+
+  redis:
+    container_name: redis
+    build: requirements/bonus/redis
+    image: redis:inception
+    networks:
+      - inception
+    restart: always
 
 
 volumes:
