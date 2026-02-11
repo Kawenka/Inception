@@ -25,10 +25,10 @@ if [ ! -f wp-config.php ]; then
     php -d memory_limit=512M /usr/local/bin/wp core download
 
     echo -e "${YELLOW}Config creation...${RESET}"
-    wp config create --dbname=$MYSQL_DATABASE \
-                    --dbuser=$MYSQL_USER \
+    wp config create --dbname=$DB_NAME \
+                    --dbuser=$DB_USER \
                     --dbhost=$DB_HOST \
-                    --dbpass=$MYSQL_PASSWORD
+                    --dbpass=$DB_PASSWORD
 
     echo -e "${YELLOW}Finalizing installation...${RESET}"
     wp core install --url=$DOMAIN_NAME \
