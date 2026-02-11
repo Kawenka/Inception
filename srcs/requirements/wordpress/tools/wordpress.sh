@@ -36,7 +36,13 @@ if [ ! -f wp-config.php ]; then
                     --admin_user=$WP_ADMIN_USER \
                     --admin_password=$WP_ADMIN_PASSWORD \
                     --admin_email=$WP_ADMIN_EMAIL \
-                    --skip-email 
+                    --skip-email
+    
+    echo -e "${GREEN}BONUS: ${YELLOW}Downloading redis cache...${RESET}"
+    wp plugin install redis-cache --activate
+    wp config set WP_REDIS_HOST redis
+    wp config set WP_REDIS_PORT 6379
+    wp redis enable
 
     echo -e "${YELLOW}Creating a second user...${RESET}"
     wp user create $WP_USER $WP_USER_EMAIL \

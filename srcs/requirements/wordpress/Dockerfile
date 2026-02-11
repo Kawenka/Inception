@@ -17,6 +17,7 @@ RUN apk add --no-cache php \
         php-iconv \
         php-phar \
         php-redis \
+        php-ctype \
         wget \
         mariadb-client
 
@@ -35,7 +36,7 @@ COPY tools/wordpress.sh /usr/local/bin/wordpress.sh
 RUN chmod +x /usr/local/bin/wordpress.sh
 
 RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www/html /var/log/php83
+    chown -R www-data:www-data /var/www/html /var/log/php*
 
 USER www-data
 
