@@ -39,7 +39,4 @@ logs-wp:
 logs-db:
 	docker logs -f mariadb
 
-logs-ng:
-	docker logs -f nginx
-
 .PHONY: all down stop re fre
