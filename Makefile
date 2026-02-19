@@ -31,6 +31,9 @@ exec-db:
 exec-ng:
 	docker exec -it nginx sh
 
+exec-ftp:
+	docker exec -it ftp-server sh
+
 # Pas necessaire
 logs-wp:
 	docker logs -f wordpress
