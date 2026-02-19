@@ -42,4 +42,7 @@ logs-wp:
 logs-db:
 	docker logs -f mariadb
 
+logs-ftp:
+	docker logs -f ftp-server
+
 .PHONY: all down stop re fre
