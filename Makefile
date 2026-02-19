@@ -10,6 +10,11 @@ stop:
 	docker compose -f ./srcs/docker-compose.yml stop
 
 re:
+	docker compose -f ./srcs/docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml up -d --build
+
+
+fre:
 	sudo rm -rf /home/ksilvest/data/mariadb/*
 	sudo rm -rf /home/ksilvest/data/wordpress/*
 	docker compose -f ./srcs/docker-compose.yml down
@@ -34,7 +39,4 @@ logs-wp:
 logs-db:
 	docker logs -f mariadb
 
-logs-ng:
-	docker logs -f nginx
-
-.PHONY: all down stop re
+.PHONY: all down stop re fre
