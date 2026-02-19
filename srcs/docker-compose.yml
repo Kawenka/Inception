@@ -62,6 +62,21 @@ services:
       - "8000:8080"
     restart: always
 
+  ftp:
+    container_name: ftp-server
+    build: requirements/bonus/ftp
+    image: ftp-server:inception
+    networks:
+      - inception
+    ports:
+      - "20-21:20-21/tcp"
+      - "40000-40009:40000-40009/tcp"
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    restart: always
+
 
 volumes:
   mariadb_data:
