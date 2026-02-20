@@ -31,6 +31,9 @@ exec-db:
 exec-ng:
 	docker exec -it nginx sh
 
+exec-ftp:
+	docker exec -it ftp-server sh
+
 # Pas necessaire
 logs-wp:
 	docker logs -f wordpress
@@ -38,5 +41,8 @@ logs-wp:
 # Pas necessaire
 logs-db:
 	docker logs -f mariadb
+
+logs-ftp:
+	docker logs -f ftp-server
 
 .PHONY: all down stop re fre
