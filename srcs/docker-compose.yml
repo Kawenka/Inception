@@ -77,6 +77,16 @@ services:
       - wordpress_data:/var/www/html
     restart: always
 
+  static-site:
+    container_name: static-site
+    build: requirements/bonus/static-site
+    image: static-site:inception
+    networks:
+     - inception
+    ports:
+     - "6767:80"
+    restart: always
+
 
 volumes:
   mariadb_data:

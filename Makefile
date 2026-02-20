@@ -45,4 +45,7 @@ logs-db:
 logs-ftp:
 	docker logs -f ftp-server
 
+logs-site:
+	docker logs -f static-site
+
 .PHONY: all down stop re fre
